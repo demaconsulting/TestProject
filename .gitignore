@@ -50,6 +50,7 @@ _ReSharper*/
 # Test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
+*.log
 
 # .NET Core
 project.lock.json
