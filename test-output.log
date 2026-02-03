@@ -1,0 +1,17 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TestProject -> /home/runner/work/TestProject/TestProject/src/TestProject/bin/Debug/net10.0/TestProject.dll
+  TestProject.Tests -> /home/runner/work/TestProject/TestProject/test/TestProject.Tests/bin/Debug/net10.0/TestProject.Tests.dll
+Test run for /home/runner/work/TestProject/TestProject/test/TestProject.Tests/bin/Debug/net10.0/TestProject.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+/home/runner/work/TestProject/TestProject/test/TestProject.Tests/bin/Debug/net10.0/TestProject.Tests.dll
+Test Parallelization enabled for /home/runner/work/TestProject/TestProject/test/TestProject.Tests/bin/Debug/net10.0/TestProject.Tests.dll (Workers: 4, Scope: MethodLevel)
+  Passed TestMethod1 [5 ms]
+
+Test Run Successful.
+Total tests: 1
+     Passed: 1
+ Total time: 0.6277 Seconds
