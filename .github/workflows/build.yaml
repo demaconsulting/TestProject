@@ -1,0 +1,67 @@
+---
+on:
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+
+jobs:
+  # Builds and unit-tests the project on supported operating systems.
+  build:
+    name: Build ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+
+      # === INSTALL DEPENDENCIES ===
+      # This section installs all required dependencies for the build.
+      # Downstream projects: Add any additional dependency installations here.
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # === BUILD AND TEST ===
+      # This section builds and tests the project.
+      # Downstream projects: Add any additional build or test steps here.
+
+      - name: Restore Dependencies
+        run: >
+          dotnet restore TestProject.slnx
+
+      - name: Build
+        run: >
+          dotnet build TestProject.slnx
+          --no-restore
+          --configuration Release
+          --property:Version=${{ inputs.version }}
+
+      - name: Test
+        run: >
+          dotnet test TestProject.slnx
+          --no-build
+          --configuration Release
+          --property:Version=${{ inputs.version }}
+          --logger "trx;LogFilePrefix=${{ matrix.os }}"
+          --results-directory artifacts
+
+      # === UPLOAD ARTIFACTS ===
+      # This section uploads all build artifacts.
+      # Downstream projects: Add any additional artifact uploads here.
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifacts-build-${{ matrix.os }}
+          path: artifacts/
